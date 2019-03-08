@@ -4,7 +4,7 @@ MAINTAINER Mohammad Hosseinz Zadeh Abbas mhzuser96@gmail.com
 
 
 RUN apt-get update
-
+RUN mkdir /etc/nginx/modsec
 RUN apt-get install -y \
     apt-utils \
     autoconf \
