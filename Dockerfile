@@ -38,7 +38,7 @@ RUN make modules
 RUN cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules
 
 WORKDIR /
-RUN mkdir /etc/nginx/modsec
+
 RUN wget -P /etc/nginx/modsec/ https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended
 RUN mv /etc/nginx/modsec/modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
 RUN sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/nginx/modsec/modsecurity.conf
