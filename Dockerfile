@@ -42,6 +42,7 @@ RUN mkdir /etc/nginx/modsec
 RUN wget -P /etc/nginx/modsec/ https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended
 RUN mv /etc/nginx/modsec/modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
 RUN sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/nginx/modsec/modsecurity.conf
-ADD ./modsec/main.conf /etc/nginx/modsec/
+
 COPY ./modsec/nginx.conf /etc/nginx/nginx.conf
+ADD ./modsec/main.conf /etc/nginx/modsec/
 COPY ./modsec/default.conf /etc/nginx/conf.d/default.conf
