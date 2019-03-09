@@ -2,9 +2,12 @@ FROM nginx:1.14
 
 MAINTAINER Mohammad Hosseinz Zadeh Abbas mhzuser96@gmail.com
 
-
-RUN apt-get update
 RUN mkdir /etc/nginx/modsec
+ENTRYPOINT [ "/bin/bash" , "/run.sh" ]
+COPY ./modsec/nginx.conf /etc/nginx/nginx.conf
+ADD ./modsec/main.conf /etc/nginx/modsec/
+COPY ./modsec/default.conf /etc/nginx/conf.d/default.conf
+
 RUN apt-get install -y \
     apt-utils \
     autoconf \
@@ -39,10 +42,4 @@ RUN cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules
 
 WORKDIR /
 
-RUN wget -P /etc/nginx/modsec/ https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended
-RUN mv /etc/nginx/modsec/modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
-RUN sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/nginx/modsec/modsecurity.conf
-
-COPY ./modsec/nginx.conf /etc/nginx/nginx.conf
-ADD ./modsec/main.conf /etc/nginx/modsec/
-COPY ./modsec/default.conf /etc/nginx/conf.d/default.conf
+ADD ./modsec/modsecurity.conf /etc/nginx/modsec/
