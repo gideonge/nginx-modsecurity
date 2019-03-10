@@ -45,3 +45,4 @@ ADD ./modsec/unicode.mapping /etc/nginx/modsec/
 ADD ./modsec/main.conf /etc/nginx/modsec/
 COPY ./modsec/nginx.conf /etc/nginx/nginx.conf
 COPY ./modsec/default.conf /etc/nginx/conf.d/default.conf
+ADD ./modsec/modsecurity.conf /etc/nginx/modsec/
